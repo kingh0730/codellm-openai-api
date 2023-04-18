@@ -1,3 +1,6 @@
+from .openai_api.chat import get_sample_response
+
+
 def main():
     """Entry point for the application script"""
-    print("CodeLLM: Call your main application code here")
+    print(get_sample_response())
