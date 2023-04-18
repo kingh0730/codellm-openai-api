@@ -1,0 +1,55 @@
+from typing import List
+
+
+def max_subarray_sum(nums: List[int]) -> int:
+    """
+    Problem:
+
+    You are given an array of integers `nums`, where there are `n` integers in total. Your task is to find a contiguous subarray of `nums` that has the largest sum and return its sum.
+
+    Examples:
+
+    Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+    Output: 6
+    Explanation: The contiguous subarray [4,-1,2,1] has the largest sum = 6.
+
+    Input: nums = [1]
+    Output: 1
+
+    Input: nums = [5,4,-1,7,8]
+    Output: 23
+
+    Tests:
+
+    ```python
+    def test_max_subarray_sum():
+        assert max_subarray_sum([-2,1,-3,4,-1,2,1,-5,4]) == 6
+        assert max_subarray_sum([1]) == 1
+        assert max_subarray_sum([5,4,-1,7,8]) == 23
+        assert max_subarray_sum([1,2,-1,3,4,-1]) == 9
+        assert max_subarray_sum([-1,-2,-3,-4,-5]) == -1
+    ```
+
+    Solution:
+
+    One possible solution to this problem is the Kadane's algorithm, which has a time complexity of O(n).
+
+    The idea behind this algorithm is to iterate through the array and at each iteration, update two variables: `current_max` and `global_max`. `current_max` keeps track of the maximum subarray sum that ends at the current index, and `global_max` keeps track of the maximum subarray sum seen so far.
+
+    At each iteration, we compare the current element with the sum of the current element and `current_max`. If the current element is greater, we update `current_max` with the current element, otherwise we update it with the sum. We then compare `current_max` with `global_max` and update it if `current_max` is greater.
+
+    Here's the implementation:
+    """
+
+    current_max = global_max = nums[0]
+    for i in range(1, len(nums)):
+        current_max = max(nums[i], current_max + nums[i])
+        global_max = max(global_max, current_max)
+    return global_max
+
+
+assert max_subarray_sum([-2, 1, -3, 4, -1, 2, 1, -5, 4]) == 6
+assert max_subarray_sum([1]) == 1
+assert max_subarray_sum([5, 4, -1, 7, 8]) == 23
+assert max_subarray_sum([1, 2, -1, 3, 4, -1]) == 9
+assert max_subarray_sum([-1, -2, -3, -4, -5]) == -1
