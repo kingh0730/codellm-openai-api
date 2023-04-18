@@ -1,4 +1,5 @@
 venv/
+.env
 
 # general things to ignore
 build/
